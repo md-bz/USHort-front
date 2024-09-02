@@ -1,0 +1,14 @@
+:root {
+    font-size: 1.5em;
+    --bulma-primary-h: 269deg;
+    --bulma-link-h: 212deg;
+    --bulma-dark-l: 25%;
+    --bulma-body-background-color: hsl(220, 20%, 20%);
+    --bulma-body-background-color: hsl(220, 20%, 20%);
+}
+
+.box {
+    --bulma-box-background-color: hsla(0, 0%, 1%, 0.1);
+    --bulma-box-shadow: 0 0.5em 1em -0.125em hsla(0deg, 0%, 40%, 0.1),
+        0 0px 0 1px hsla(0deg, 0%, 100%, 0.02);
+}
