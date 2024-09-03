@@ -1,9 +1,12 @@
 import { error, redirect } from "@sveltejs/kit";
+import { getMe } from "$lib/server/api";
 
-export function load({ cookies }) {
+export async function load({ cookies }) {
     const jwt = cookies.get("jwt");
+    const myInfo = await getMe(jwt);
+    console.log(myInfo);
+
     if (!jwt) {
-        // error(401, "You are not logged in.");
         redirect(301, "/login");
     }
     return {};

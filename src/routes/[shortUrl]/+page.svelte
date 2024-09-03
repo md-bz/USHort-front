@@ -13,5 +13,5 @@
         </div>
     </div>
 {:else}
-    <div>U shouldn't be seeing this</div>
+    <div>Something went terribly wrong</div>
 {/if}
