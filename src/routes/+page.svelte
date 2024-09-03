@@ -1,10 +1,19 @@
 <script>
     import { enhance } from "$app/forms";
     import UrlCard from "$lib/UrlCard.svelte";
+    import { page } from "$app/stores";
     export let form;
 
-    const urls = [];
+    $: urls = [];
     let isLoading = false;
+    const enhanceFunction = () => {
+        return ({ result, update }) => {
+            isLoading = false;
+            result.data.shortUrl = `${$page.url.origin}/${result.data.shortUrl}`;
+            if (result.type === "success") urls = [...urls, result.data];
+            update();
+        };
+    };
 </script>
 
 <div
@@ -24,12 +33,7 @@
         action="?/shorten"
         method="post"
         class="field is-flex"
-        use:enhance={() => {
-            return async ({ result }) => {
-                console.log(result);
-                isLoading = false;
-            };
-        }}
+        use:enhance={enhanceFunction}
     >
         <div class="control {isLoading ? 'is-loading' : ''}">
             <input
