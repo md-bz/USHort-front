@@ -25,8 +25,6 @@ export async function login(data) {
 }
 
 export async function createShort(url, jwt) {
-    console.log(jwt);
-
     const headers = {
         "Content-Type": "application/json",
     };
@@ -41,7 +39,7 @@ export async function getFullUrl(shortUrl) {
     return await apiFetch(`/urls/${shortUrl}`, {});
 }
 export async function getMyUrls(jwt) {
-    return await apiFetch("users/my-urls", {
+    return await apiFetch("/users/my-urls", {
         headers: {
             "Content-Type": "application/json",
             Cookie: `jwt=${jwt}`,
@@ -49,21 +47,11 @@ export async function getMyUrls(jwt) {
     });
 }
 
-async function main() {
-    // let req = await createShort("https://www.youtube.com/watch?v=OnkTUKtxRic");
-    // const req = await login({
-    //     // name: "mehrad",
-    //     email: "mehrad@gmail.con",
-    //     password: "thisismypass",
-    //     // passwordConfirm: "thisismypass",
-    // });
-    // const req = await createShort(
-    //     "https://www.youtube.com/watch?v=sReGQj67HJU"
-    // );
-    // console.log(req);
-    // console.log(req.data.url.shortUrl);
-    // const req2 = await getFullUrl(req.data.url.shortUrl);
-    // console.log(req2);
+export async function getMe(jwt) {
+    return await apiFetch("/users/me", {
+        headers: {
+            "Content-Type": "application/json",
+            Cookie: `jwt=${jwt}`,
+        },
+    });
 }
-
-// main();
