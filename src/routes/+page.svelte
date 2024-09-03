@@ -1,15 +1,15 @@
 <script>
     import { enhance } from "$app/forms";
     import UrlCard from "$lib/UrlCard.svelte";
-    import { page } from "$app/stores";
     export let form;
+    export let data;
 
-    $: urls = [];
+    $: urls = data && data.urls ? data.urls : [];
+
     let isLoading = false;
     const enhanceFunction = () => {
         return ({ result, update }) => {
             isLoading = false;
-            result.data.shortUrl = `${$page.url.origin}/${result.data.shortUrl}`;
             if (result.type === "success") urls = [...urls, result.data];
             update();
         };
@@ -17,8 +17,7 @@
 </script>
 
 <div
-    class="container is-flex is-justify-content-center is-align-items-center is-flex-direction-column"
-    style="height: 80vh;"
+    class="container is-flex is-justify-content-center is-align-items-center is-flex-direction-column my-5"
 >
     {#if form?.error}
         <div class="notification">
@@ -51,7 +50,7 @@
             Shorten
         </button>
     </form>
-    <ul>
+    <ul class="box">
         {#each urls as { url, shortUrl }}
             <UrlCard {shortUrl} {url} />
         {/each}
